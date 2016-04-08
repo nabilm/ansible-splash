@@ -1,0 +1,28 @@
+---
+
+splash_app_name: splash
+splash_http_port: 8050
+update_apt_cache: yes
+cache_valid_time: 3600
+splash_user: splash
+splash_group: splash
+splash_sip_version: "4.17"
+splash_sip_package_url: "http://sourceforge.net/projects/pyqt/files/sip/sip-{{ splash_sip_version }}/sip-{{ splash_sip_version }}.tar.gz"
+splash_pyqt_version: "5.5.1"
+splash_pyqt_pacakge_url: "http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-{{ splash_pyqt_version }}/PyQt-gpl-{{ splash_pyqt_version }}.tar.gz"
+splash_qt_path: "/opt/qt55"
+splash_build_parallel_jobs: "1"
+splash_python_version: "3"
+splash_virtualenv_rootdir_path: "/apps"
+splash_virtualenv_path: "{{ splash_virtualenv_rootdir_path }}/splash"
+splash_proxy_profile_path: "{{ splash_virtualenv_path}}/proxy_profiles/"
+splash_lua_modules_path: "{{ splash_virtualenv_path }}/lua_modules/?.lua"
+splash_js_profiles_path: "{{ splash_virtualenv_path }}/js_profiles/"
+splash_log_dir: "{{ splash_virtualenv_path}}/log"
+splash_binary_path: "{{ splash_virtualenv_path}}/bin/{{ splash_app_name }}"
+splash_log_file_stdout: "{{ splash_log_dir }}/{{ splash_app_name }}_stdout.log"
+splash_log_file_stderr: "{{ splash_log_dir }}/{{ splash_app_name }}_stderr.log"
+splash_python_bin_path: "{{ splash_virtualenv_path }}/bin/python3"
+splash_download_dir: "/tmp/download"
+splash_build_dir: "/tmp/build"
+splash_version: 2.0.2

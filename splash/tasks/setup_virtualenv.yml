@@ -1,0 +1,23 @@
+---
+
+- name: Ugrade pip
+  pip: name=virtualenv extra_args='--upgrade'
+  tags:
+    - splash
+    - virtualenv
+
+# create the virtualenv root dir
+- name: Create virtualenv root directory
+  file: path={{ splash_virtualenv_rootdir_path }} state=directory owner={{ splash_user }} group={{ splash_group }} mode=0775
+  tags:
+    - splash
+    - virtualenv
+    - qt5
+
+# Create python3 virtual env
+- name: create splash virtual env.
+  shell: /usr/local/bin/virtualenv -p $(which python3) {{ splash_virtualenv_path }}
+  tags:
+    - splash
+    - virtualenv
+    - qt5

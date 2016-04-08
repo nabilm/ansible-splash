@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+[program:{{ splash_app_name }}]
+command={{ splash_binary_path }} --port={{ splash_http_port }} --lua-package-path={{ splash_lua_modules_path }}/?.lua --js-profiles-path={{ splash_js_profiles_path }}
+autostart=true
+autorestart=true
+stdout_logfile={{ splash_log_file_stdout }}
+stderr_logfile={{ splash_log_file_stderr }}
+stopwaitsecs=26
+stopsignal=HUP
+redirect_stderr=true
+killasgroup=true
+user={{ splash_user }}
+directory={{ project_path }}

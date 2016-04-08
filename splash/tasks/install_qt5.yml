@@ -1,0 +1,50 @@
+---
+
+# create installation tmp directory
+- name: Create tmp directory
+  file: path={{ splash_download_dir }} state=directory owner={{ splash_user }} group={{ splash_group }} mode=0775
+  tags:
+    - splash
+    - qt5
+
+# create installation tmp directory
+- name: Create tmp directory
+  file: path={{ splash_build_dir }} state=directory owner={{ splash_user }} group={{ splash_group }} mode=0775
+  tags:
+    - splash
+    - qt5
+
+# downloading Sip
+- name: Download SIP version {{ splash_sip_version }}
+  get_url: url={{ splash_sip_package_url }} dest={{ splash_download_dir }}/sip.tar.gz
+  tags:
+    - splash
+    - qt5
+    - sip
+
+# unarchieve Sip
+- unarchive: src={{ splash_download_dir }}/sip.tar.gz dest={{ splash_build_dir }} copy=no
+
+# compile & install Sip
+- name: Compile & install  sip
+  shell: /bin/bash -c "source {{ splash_virtualenv_path}}/bin/activate && cd {{ splash_build_dir }}/sip-{{ splash_sip_version}} &&  {{ splash_python_bin_path}} configure.py && make -j {{ splash_build_parallel_jobs}} && make install"
+
+# downloading pyqt5
+- name: Download pyqt5 version {{ splash_pyqt_version }}
+  get_url: url={{ splash_pyqt_pacakge_url }} dest={{ splash_download_dir }}/pyqt5.tar.gz
+  tags:
+    - splash
+    - qt5
+    - pyqt5
+
+# Unarchieve Sip
+- unarchive: src={{ splash_download_dir }}/pyqt5.tar.gz dest={{ splash_build_dir }} copy=no
+
+# compile & install pyqt5
+- name: Compile & install pyqt5
+  shell: /bin/bash -c "source {{ splash_virtualenv_path}}/bin/activate && cd {{ splash_build_dir }}/PyQt-gpl-{{ splash_pyqt_version }} && {{ splash_python_bin_path}} configure.py -c --qmake "{{ splash_qt_path }}/bin/qmake" --verbose --confirm-license --sip {{ splash_virtualenv_path }}/bin/sip --no-designer-plugin -e QtCore -e QtGui -e QtWidgets -e QtNetwork -e QtWebKit -e QtWebKitWidgets -e QtSvg -e QtPrintSupport && make -j {{ splash_build_parallel_jobs}} && make install"
+  tags:
+    - splash
+    - qt5
+    - pyqt5
+

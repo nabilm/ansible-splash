@@ -1,0 +1,10 @@
+---
+
+- name: Create the application user
+  user: name={{ splash_user }} state=present shell=/bin/bash
+
+- name: Create the application group
+  group: name={{ splash_group }} system=yes state=present
+
+- name: Add the application user to the application group
+  user: name={{ splash_user }} groups={{ splash_group }} state=present append=yes

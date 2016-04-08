@@ -1,0 +1,30 @@
+---
+
+- name: Install base packages
+  apt: >
+    name={{ item }}
+    update_cache={{ update_apt_cache }}
+    state=latest
+    cache_valid_time={{ cache_valid_time }}
+  with_items:
+    - supervisor
+  tags:
+    - packages
+    - supervisor
+
+- name: Create the Supervisor config file
+  template: src=supervisor_config.j2
+            dest=/etc/supervisor/conf.d/{{ splash_app_name }}.conf
+            backup=yes
+  tags:
+    - supervisor
+
+- name: Re-read supervisor config
+  supervisorctl: name={{ splash_app_name }} state=present
+  tags:
+    - supervisor
+
+- name: Ensure application is running
+  supervisorctl: name={{ splash_app_name }} state=started
+  tags:
+    - supervisord
