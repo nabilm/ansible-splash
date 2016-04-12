@@ -1,0 +1,17 @@
+---
+
+dependencies: []
+
+galaxy_info:
+  author: Mohamed Nabil Hafez 
+  company: Flying elephant lab
+  description: Manage splash installation on ubuntu trusty
+  license: GPLv2
+  min_ansible_version: 1.8
+  platforms:
+  - name: Ubuntu
+    versions:
+      - trusty
+    categories:
+    - scrapying
+    - browsers
