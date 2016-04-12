@@ -1,7 +1,6 @@
 # ansible-splash
 
-Ansible role to install splash based on the official splash docker provisioning scripts
-
+Ansible role to install splash based on the official splash docker provisioning scripts mentioned in http://splash.readthedocs.org/en/latest/index.html
 
 Installing splash using ansible :
 --------------------------------------------------
