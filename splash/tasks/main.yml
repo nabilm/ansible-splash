@@ -1,22 +1,5 @@
 ---
 
-# setting timezone
-- include: set_timezone.yml
-  tags:
-    - splash
-    - timezone
-
-# set locale 
-- include: set_locale.yml
-  tags:
-    - splash
-    - locale
-
-# Create swap file ( if you are using vagrant you need more swap ( memory) to compile qt )
-- include: create_swap_file.yml
-  when: create_swap_file
-  tags: swap
-
 # install base package ( packages needed for the installation process )
 - name: Prepare installation
   apt: >
@@ -29,7 +12,6 @@
     - curl
     - software-properties-common
     - python3-software-properties
-    - python-pip
 
   tags:
     - packages
@@ -104,15 +86,25 @@
     - virtualenv
     - qt5
 
+- stat: path={{ splash_virtualenv_path }}/bin/activate
+  register: virtualenv_actv_dir
+
 # setup virtualenv
+# Avoid re-creating virtualenv if it's already created
 - include: setup_virtualenv.yml
+  when: virtualenv_actv_dir.stat.exists == False
   tags:
     - splash
     - virtualenv
     - qt5
 
+- stat: path={{ splash_virtualenv_path }}/lib/python3.4/site-packages/PyQt5/
+  register: qt_module_dir
+
 # install qt5
+# Avoid re-installing qt5 if it's already installed and compiled 
 - include: install_qt5.yml
+  when: qt_module_dir.stat.exists == False
   tags:
     - splash
     - qt5
