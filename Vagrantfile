@@ -18,7 +18,7 @@ Vagrant.configure(2) do |config|
   #config.vm.network "forwarded_port", guest: 8000, host: 8080
   config.vm.network "forwarded_port", guest: 8050, host: 7000
 
-  config.vm.network :private_network, ip: "192.168.33.30"
+  config.vm.network :private_network, ip: "192.168.33.70"
 
   config.vm.provider "virtualbox" do |v|
       v.memory = 1024
