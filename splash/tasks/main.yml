@@ -1,5 +1,22 @@
 ---
 
+# setting timezone
+- include: set_timezone.yml
+  tags:
+    - splash
+    - timezone
+
+# set locale 
+- include: set_locale.yml
+  tags:
+    - splash
+    - locale
+
+# Create swap file ( if you are using vagrant you need more swap ( memory) to compile qt )
+- include: create_swap_file.yml
+  when: create_swap_file
+  tags: swap
+
 # install base package ( packages needed for the installation process )
 - name: Prepare installation
   apt: >
@@ -12,6 +29,7 @@
     - curl
     - software-properties-common
     - python3-software-properties
+    - python-pip
 
   tags:
     - packages

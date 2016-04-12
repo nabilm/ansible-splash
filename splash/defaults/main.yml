@@ -1,5 +1,7 @@
 ---
 
+# timezone configuration
+timezone: Africa/Cairo
 splash_app_name: splash
 splash_http_port: 8050
 update_apt_cache: yes
@@ -26,3 +28,6 @@ splash_python_bin_path: "{{ splash_virtualenv_path }}/bin/python3"
 splash_download_dir: "/tmp/download"
 splash_build_dir: "/tmp/build"
 splash_version: 2.0.2
+swap_file_path: /swapfile
+swap_file_size_kb: 1024
+create_swap_file: no

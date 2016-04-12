@@ -1,0 +1,9 @@
+---
+
+- name: Installing splash
+  sudo: yes
+  hosts: all
+  roles:
+    - splash
+
+
