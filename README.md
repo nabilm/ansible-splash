@@ -17,7 +17,7 @@ Installing splash using vagrant:
 
 More info
 -------------------------------------------------------------------
-    - Testing on Ubuntu 14.04 and MacOSX - EL captain
+    - Tested on Ubuntu 14.04 and MacOSX - EL captain
     - The role is associated with a sample play book.. all you need to do is adding the role to you project
     - Feel free to ask me any question or create issues and i'll fix it
 
